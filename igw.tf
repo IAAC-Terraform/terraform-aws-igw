@@ -9,7 +9,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_route" "igwroute" {
-  count                  = "${var.create_vpc && var.igw_route ? 1 : 0}"
+  count                  = "${var.create_vpc && var.igw_route ? length(var.route_table_id) : 0}"
   route_table_id         = "${element(var.route_table_id, count.index)}"
   destination_cidr_block = "${var.destination_cidr_block}"
   gateway_id             = "${element(concat(aws_internet_gateway.igw.*.id, list("")), 0)}"
