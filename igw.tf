@@ -2,10 +2,7 @@ resource "aws_internet_gateway" "igw" {
   count  = "${var.create_vpc && var.igw_route ? 1 : 0}"
   vpc_id = "${var.vpc_id}"
 
-  tags {
-    Name = "${var.env}-igw-0${count.index + 1}"
-    env  = "${var.env}"
-  }
+  tags = "${merge(map("Name", format("%s", var.name-0${count.index + 1})), var.tags)}"
 }
 
 resource "aws_route" "igwroute" {
