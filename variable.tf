@@ -15,7 +15,7 @@ variable "igw_route" {}
 variable "igw_route_count" {}
 
 variable "tags" {
-    type "map"
+    type = "map"
 }
 
 variable "name" {}
